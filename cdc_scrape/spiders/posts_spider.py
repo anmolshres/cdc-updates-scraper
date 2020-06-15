@@ -1,6 +1,8 @@
 import scrapy
 import html2text
+from datetime import datetime
 
+now = datetime.now()
 class PostsSpider(scrapy.Spider):
     linksFile = open('all-cdc-links.txt','r')
 
@@ -9,6 +11,7 @@ class PostsSpider(scrapy.Spider):
 
     def parse(self, response):
         url = response.url
+        datetime_today = now.strftime("%B %d, %Y %H:%M:%S")
         syndicate_content = response.css('.syndicate').extract()[1] if len(response.css('.syndicate').extract()) > 1 else response.css('.syndicate').extract()[0]
         converter = html2text.HTML2Text()
         converter.ignore_links = True
@@ -16,7 +19,13 @@ class PostsSpider(scrapy.Spider):
         title = response.css('title::text').get() 
         yield{
             'title':title,
+            'source':'Centers for Disease Control and Prevention',
             'date':date,
             'url':url,
+            'scraped': datetime_today,
+            'classes':['Government'],
+            'country':'United States of America',
+            'municipality':'National',
+            'language':'English(US)',
             'text':converter.handle(syndicate_content)
         }

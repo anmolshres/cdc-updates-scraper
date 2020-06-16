@@ -1,5 +1,6 @@
 import scrapy
 import html2text
+import cld2
 from datetime import datetime
 
 now = datetime.now()
@@ -17,6 +18,9 @@ class PostsSpider(scrapy.Spider):
         converter.ignore_links = True
         date = response.css('span#last-reviewed-date::text').get()
         title = response.css('title::text').get() 
+        text = converter.handle(syndicate_content)
+        isReliable, textBytesFound, details = cld2.detect(text)
+        language = details[0].language_name
         yield{
             'title':title,
             'source':'Centers for Disease Control and Prevention',
@@ -26,6 +30,6 @@ class PostsSpider(scrapy.Spider):
             'classes':['Government'],
             'country':'United States of America',
             'municipality':'National',
-            'language':'English(US)',
-            'text':converter.handle(syndicate_content)
+            'language': language,
+            'text': text
         }

@@ -1,11 +1,11 @@
 # CDC COVID-19 Updates Scraper
 This web scraper uses [Scrapy](https://scrapy.org/) with Python to scrape all updates posted by [CDC](https://www.cdc.gov/) regarding COVID-19 posted on [this page](https://www.cdc.gov/coronavirus/2019-ncov/whats-new-all.html)
 
-This scraper uses scrapy and [html2text](https://pypi.org/project/html2text/) as dependencies. I am also using Python3 to create a [virtual environment](https://docs.python.org/3/library/venv.html#venv-def) to create an isoalted environment to run the scraper on.
+This scraper uses scrapy,[CLD-2](https://pypi.org/project/cld2-cffi/), and [html2text](https://pypi.org/project/html2text/) as dependencies. I am also using Python3 to create a [virtual environment](https://docs.python.org/3/library/venv.html#venv-def) to create an isoalted environment to run the scraper on.
 
 ## Steps before running scraper:
 - Create a virtualenv and run it. (This is slightly different for [Windows](https://programwithus.com/learn-to-code/Pip-and-virtualenv-on-Windows/) vs [Linux/Mac](https://www.pythonforbeginners.com/basics/how-to-use-python-virtualenv))
-- Run `pip install scrapy` and `pip install html2text` from the virtualenv to install all the dependencies
+- Run `pip install scrapy`,`pip install cld2-cffi`, and `pip install html2text` from the virtualenv to install all the dependencies
 ## Running the Scraper on Windows
 While inside the virtualenv `cd` into the root directory that contains `powershell-script.ps1` and run `.\powershell-script.ps1 ` from powershell terminal to run the script
 ## Running the Scraper on Mac/Linux
